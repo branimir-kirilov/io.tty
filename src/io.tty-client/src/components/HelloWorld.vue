@@ -1,15 +1,23 @@
 <template>
   <div class="hello">
-    {{ data }}
+    <amplify-authenticator v-bind:authConfig="authConfig"></amplify-authenticator>
   </div>
 </template>
 
 <script>
+import { components } from 'aws-amplify-vue'
+import { AmplifyEventBus } from 'aws-amplify-vue';
+
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String,
+  created() {
+    AmplifyEventBus.$on('authState', info => {
+      console.log(`Here is the auth event that was just emitted by an Amplify component: ${info}`)
+    });
   },
+  components: {
+    ...components
+  }
 };
 </script>
 

@@ -9,6 +9,8 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "aws-amplify": "^1.1.19",
+    "aws-amplify-vue": "^0.2.5",
     "axios": "^0.18.0",
     "vue": "^2.5.22",
     "vue-router": "^3.0.1",
