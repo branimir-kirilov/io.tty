@@ -14,13 +14,13 @@
               <tbody>
                 <tr>
                   <td>
-                    {{ stats.payload.state.reported.temp }} °C
+                     <strong> {{ stats.payload.state.reported.temp }}°C </strong>
                   </td>
                   <td>
-                    {{ stats.payload.state.reported.pressure }}
+                    <strong> {{ stats.payload.state.reported.pressure.toFixed(3) }} hPa </strong>
                   </td>
                   <td>
-                    {{ stats.payload.state.reported.humidity }}
+                    <strong> {{ stats.payload.state.reported.humidity.toFixed(3) }} % RH </strong>
                   </td>
                 </tr>
               </tbody>
@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     timeConverter(UNIX_timestamp) {
-      const a = new Date(UNIX_timestamp * 1000);
+      const a = new Date(UNIX_timestamp * 1);
       const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       const year = a.getFullYear();
       const month = months[a.getMonth()];
