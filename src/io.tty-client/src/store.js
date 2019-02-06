@@ -32,6 +32,10 @@ export default new Vuex.Store({
       // eslint-disable-next-line
       state.signedIn = null;
     },
+    removeDevice(state) {
+      // eslint-disable-next-line
+      state.deviceId = null;
+    },
   },
   actions: {
     getDeviceIdFromLocalStorage({ commit, dispatch }) {
@@ -43,6 +47,10 @@ export default new Vuex.Store({
       }
 
       dispatch('getStats');
+    },
+    removeDeviceId({ commit }) {
+      commit('removeDevice');
+      localStorage.setItem('deviceId', null);
     },
     setDeviceId({ commit, dispatch }, deviceId) {
       localStorage.setItem('deviceId', JSON.stringify({ deviceId }));

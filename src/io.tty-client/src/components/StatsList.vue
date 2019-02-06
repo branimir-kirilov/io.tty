@@ -36,6 +36,7 @@ export default {
       if (info === 'signedOut') {
         this.$store.dispatch('signOut');
         this.$store.dispatch('removeStats');
+        this.$store.dispatch('removeDeviceId');
       }
     });
 
