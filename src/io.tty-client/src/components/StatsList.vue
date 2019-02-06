@@ -3,7 +3,7 @@
     <amplify-authenticator class="auth"></amplify-authenticator>
     <amplify-sign-out class="sign-out" v-if="isAuthenticated"></amplify-sign-out>
     <div v-if="stats && isAuthenticated && this.storedDeviceId">
-      <SingleMeasurment v-for="singleStat in stats" v-bind:key="singleStat.timestamp" :stats="singleStat"/>
+      <SingleMeasurment v-for="singleStat in statsReversed" v-bind:key="singleStat.timestamp" :stats="singleStat"/>
     </div>
     <div v-else-if="isAuthenticated && this.storedDeviceId">
       <span>Loading...</span>
@@ -63,6 +63,9 @@ export default {
     stats: state => state.stats,
     isAuthenticated: state => state.signedIn,
     storedDeviceId: state => state.deviceId,
+    statsReversed() {
+      return this.stats.slice().reverse();
+    }
   }),
   methods: {
     submitDeviceId() {

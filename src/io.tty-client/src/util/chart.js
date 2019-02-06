@@ -3,27 +3,39 @@ import { Line } from 'vue-chartjs';
 export default {
   extends: Line,
   props: {
-    stats: {
+    yAxis: {
       type: Array,
       default: null,
     },
+    xAxis: {
+      type: Array,
+      default: null,
+    },
+    label: {
+      type: String,
+      required: true,
+    },
+    color: {
+      type: String,
+      default: '#f87979',
+    }
   },
   data() {
-    const temp = this.stats.map(stat => stat.payload.state.reported.temp);
-    const timestamps = this.stats.map(stat => this.timeConverter(stat.timestamp));
+    // const temp = this.stats.map(stat => stat.payload.state.reported.temp);
+    // const timestamps = this.stats.map(stat => this.timeConverter(stat.timestamp));
 
     return {
       datacollection: {
         // Data to be represented on x-axis
-        labels: timestamps,
+        labels: this.yAxis,
         datasets: [{
-          label: 'Data One',
-          backgroundColor: '#f87979',
+          label: this.label,
+          backgroundColor: this.color,
           pointBackgroundColor: 'white',
           borderWidth: 1,
           pointBorderColor: '#249EBF',
           // Data to be represented on y-axis
-          data: temp,
+          data: this.xAxis,
         }],
       },
       // Chart.js options that controls the appearance of the chart
@@ -31,7 +43,7 @@ export default {
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: true,
+              beginAtZero: false,
             },
             gridLines: {
               display: true,
@@ -50,21 +62,6 @@ export default {
         maintainAspectRatio: false,
       },
     };
-  },
-  methods: {
-    timeConverter(UNIX_timestamp) {
-      const a = new Date(UNIX_timestamp * 1);
-      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      const year = a.getFullYear();
-      const month = months[a.getMonth()];
-      const date = a.getDate();
-      const hour = a.getHours();
-      const min = a.getMinutes();
-      const sec = a.getSeconds();
-      const time = `${date} ${month} ${hour}:${min}:${sec}`;
-
-      return time;
-    },
   },
   mounted() {
     // renderChart function renders the chart with the datacollection and options object.
