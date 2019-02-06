@@ -2,6 +2,9 @@
 
 Simple weather monitor that sends data (temperature, humidity and pressure) periodically to AWS IoT Core via MQTT.
 
+- Simple wireframe: 
+![wireframe](./docs/wireframe.png)
+
 ## The device
 
 The main controller used is [Wemos D1 Mini](https://wiki.wemos.cc/products:d1:d1_mini) and [Adafruite BME280](https://www.adafruit.com/product/2652)
