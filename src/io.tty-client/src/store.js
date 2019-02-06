@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import axios from 'axios';
 import DynamoDB from 'aws-sdk/clients/dynamodb';
 import { Auth } from 'aws-amplify';
 
@@ -19,7 +18,7 @@ export default new Vuex.Store({
     },
     setDevice(state, deviceId) {
       // eslint-disable-next-line
-      state.stats = deviceId;
+      state.deviceId = deviceId;
     },
     setSignedIn(state, isSignedIn) {
       // eslint-disable-next-line
@@ -27,13 +26,31 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    setDeviceId({ commit }, deviceId) {
+    getDeviceIdFromLocalStorage({ commit, dispatch }) {
+      const deviceIdLocalStorage = JSON.parse(localStorage.getItem('deviceId'));
+      const deviceId = deviceIdLocalStorage && deviceIdLocalStorage.deviceId;
+
+      if (deviceId) {
+        commit('setDevice', deviceId);
+      }
+
+      dispatch('getStats');
+    },
+    setDeviceId({ commit, dispatch }, deviceId) {
+      localStorage.setItem('deviceId', JSON.stringify({ deviceId }));
       commit('setDevice', deviceId);
+      dispatch('getStats');
     },
     signedIn({ commit }) {
       commit('setSignedIn', true);
     },
     getStats({ commit }) {
+      const { deviceId } = this.state;
+
+      if (!deviceId) {
+        return;
+      }
+
       Auth.currentCredentials()
         .then((credentials) => {
           console.log('credentials', credentials);
@@ -48,7 +65,7 @@ export default new Vuex.Store({
             KeyConditionExpression: 'DeviceId = :deviceId and #timestamp between :v2 and :v3',
             ExpressionAttributeNames: { '#timestamp': 'timestamp' },
             ExpressionAttributeValues: {
-              ':deviceId': 'device1',
+              ':deviceId': deviceId,
               ':v2': '1234',
               ':v3': '3234',
             },
