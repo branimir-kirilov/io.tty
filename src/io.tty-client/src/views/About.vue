@@ -1,5 +1,14 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <a href="https://github.com/Branimir123/io.tty">👉 Check the GitHub repo</a>
   </div>
 </template>
+
+<style scoped>
+a {
+  text-decoration: none;
+  color: black;
+  font-size: 45px;
+  cursor: pointer;
+}
+</style>

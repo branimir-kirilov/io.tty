@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { components, AmplifyEventBus } from 'aws-amplify-vue'
+import { components, AmplifyEventBus } from 'aws-amplify-vue';
 import DynamoDB from 'aws-sdk/clients/dynamodb';
 import { Auth } from 'aws-amplify';
 import { mapState } from 'vuex';
@@ -20,33 +20,33 @@ import SingleMeasurment from '@/components/SingleMeasurment.vue';
 export default {
   name: 'StatsList',
   async created() {
-    AmplifyEventBus.$on('authState', info => {
+    AmplifyEventBus.$on('authState', (info) => {
       console.log(`Here is the auth event that was just emitted by an Amplify component: ${info}`);
-      if(info === 'signedIn' && Auth.user) {
-         this.$store.dispatch('signedIn');
-         this.$store.dispatch('getStats');
-      } 
+      if (info === 'signedIn' && Auth.user) {
+        this.$store.dispatch('signedIn');
+        this.$store.dispatch('getStats');
+      }
     });
 
     await Auth.currentAuthenticatedUser()
-      .then(() => { 
+      .then(() => {
         this.$store.dispatch('signedIn');
         this.$store.dispatch('getStats');
       })
-      .catch(() => { 
+      .catch(() => {
         // TODO: dispatch action on failure
       });
   },
 
   components: {
     SingleMeasurment,
-    ...components
+    ...components,
   },
   computed: mapState({
-      stats: state => state.stats,
-      deviceId: state => state.deviceId,
-      isAuthenticated: state => state.signedIn
-   })  
+    stats: state => state.stats,
+    deviceId: state => state.deviceId,
+    isAuthenticated: state => state.signedIn,
+  }),
 };
 </script>
 
