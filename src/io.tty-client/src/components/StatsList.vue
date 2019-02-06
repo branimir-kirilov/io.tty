@@ -8,7 +8,7 @@
       <span>Loading...</span>
     </div>
     <div v-else>
-      <input class="deviceInput" placeholder="Enter Your Unique Device Id" type="text" v-model="deviceId" v-on:keyup.enter="submitDeviceId">     
+      <input class="deviceInput" placeholder="Enter Your Unique Device Id" type="text" v-model="deviceId" v-on:keyup.enter="submitDeviceId">
     </div>
   </div>
 </template>
@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      deviceId: null
+      deviceId: null,
     };
   },
   computed: mapState({
@@ -59,10 +59,10 @@ export default {
   }),
   methods: {
     submitDeviceId() {
-      console.log('dispatching')
+      console.log('dispatching');
       this.$store.dispatch('setDeviceId', this.deviceId);
-    }
-  }
+    },
+  },
 };
 </script>
 
