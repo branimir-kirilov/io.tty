@@ -14,7 +14,7 @@
               <tbody>
                 <tr>
                   <td>
-                    {{ stats.payload.state.reported.temp }}
+                    {{ stats.payload.state.reported.temp }} °C
                   </td>
                   <td>
                     {{ stats.payload.state.reported.pressure }}

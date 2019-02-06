@@ -27,6 +27,7 @@ export default {
 
 .body {
     font-family: 'Courier New', Courier, monospace;
-    font-style: italic;
+    font-size: 16px;
+    margin: 0;
 }
 </style>
