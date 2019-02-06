@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <h1 class="heading">io.tty</h1>
+    <h5 class="body">Smart room monitoring</h5>
     <StatsList msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
@@ -16,3 +17,16 @@ export default {
   },
 };
 </script>
+
+<style>
+.heading {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 95px;
+  margin: 0 auto;
+}
+
+.body {
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+}
+</style>

@@ -10,18 +10,30 @@ export default new Vuex.Store({
   state: {
     stats: null,
     deviceId: null,
+    signedIn: null,
   },
   mutations: {
     getData(state, data) {
       // eslint-disable-next-line
-      console.log('state', state);
-      console.log('data', data);
       state.stats = data.Items;
+    },
+    setDevice(state, deviceId) {
+      // eslint-disable-next-line
+      state.stats = deviceId;
+    },
+    setSignedIn(state, isSignedIn) {
+      // eslint-disable-next-line
+      state.signedIn = isSignedIn;
     },
   },
   actions: {
+    setDeviceId({ commit }, deviceId) {
+      commit('setDevice', deviceId);
+    },
+    signedIn({ commit }) {
+      commit('setSignedIn', true);
+    },
     getStats({ commit }) {
-      debugger;
       Auth.currentCredentials()
         .then((credentials) => {
           console.log('credentials', credentials);
@@ -31,7 +43,7 @@ export default new Vuex.Store({
             region: 'us-east-1',
           });
 
-          const dbRes = db.query({
+          db.query({
             TableName: 'RoomMonitorTable',
             KeyConditionExpression: 'DeviceId = :deviceId and #timestamp between :v2 and :v3',
             ExpressionAttributeNames: { '#timestamp': 'timestamp' },
@@ -45,6 +57,7 @@ export default new Vuex.Store({
             if (err) {
               console.log(err);
             } else {
+              console.log('success - got data');
               commit('getData', data);
             }
           });
