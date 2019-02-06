@@ -24,6 +24,14 @@ export default new Vuex.Store({
       // eslint-disable-next-line
       state.signedIn = isSignedIn;
     },
+    removeStatsFromStore(state) {
+      // eslint-disable-next-line
+      state.stats = null;
+    },
+    setSignedOut(state) {
+      // eslint-disable-next-line
+      state.signedIn = null;
+    },
   },
   actions: {
     getDeviceIdFromLocalStorage({ commit, dispatch }) {
@@ -79,6 +87,12 @@ export default new Vuex.Store({
             }
           });
         });
+    },
+    signOut({ commit }) {
+      commit('setSignedOut');
+    },
+    removeStats({ commit }) {
+      commit('removeStatsFromStore');
     },
   },
 });

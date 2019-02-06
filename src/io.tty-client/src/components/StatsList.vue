@@ -1,13 +1,14 @@
 <template>
   <div class="hello">
-    <amplify-authenticator></amplify-authenticator>
+    <amplify-authenticator class="auth"></amplify-authenticator>
+    <amplify-sign-out class="sign-out" v-if="isAuthenticated"></amplify-sign-out>
     <div v-if="stats && isAuthenticated && this.storedDeviceId">
       <SingleMeasurment v-for="singleStat in stats" v-bind:key="singleStat.timestamp" :stats="singleStat"/>
     </div>
     <div v-else-if="isAuthenticated && this.storedDeviceId">
       <span>Loading...</span>
     </div>
-    <div v-else>
+    <div v-else-if="isAuthenticated">
       <input class="deviceInput" placeholder="Enter Your Unique Device Id" type="text" v-model="deviceId" v-on:keyup.enter="submitDeviceId">
     </div>
   </div>
@@ -30,6 +31,11 @@ export default {
       if (info === 'signedIn' && Auth.user) {
         this.$store.dispatch('signedIn');
         this.$store.dispatch('getStats');
+      }
+
+      if (info === 'signedOut') {
+        this.$store.dispatch('signOut');
+        this.$store.dispatch('removeStats');
       }
     });
 
@@ -90,4 +96,15 @@ a {
   font-size: 23px;
   font-style: italic;
 }
+
+.auth {
+  margin: 30px 0;
+}
+
+.sign-out {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+}
+
 </style>
