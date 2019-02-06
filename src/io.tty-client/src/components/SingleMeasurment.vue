@@ -76,13 +76,14 @@ export default {
   position: relative;
   width: 550px;
   margin: 0 auto;
+  color: #333;
 }
 .single-measurement-wrapper {
   border: 1px solid #eee;
   border-radius: 5px;
   margin: 25px;
   padding: 15px;
-  background-color: rgba(12, 185, 55, 0.5);
+  background-color: rgba(255, 153, 1, 0.8);
   text-align: center;
   position: relative;
 }
@@ -93,6 +94,7 @@ export default {
   font-size: 22px;
   padding: 25px;
   font-style: italic;
+  color: #333;
 }
 .date {
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

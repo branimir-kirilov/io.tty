@@ -1,8 +1,11 @@
 <template>
-    <div v-if="stats">
-        <chartjs class="chart" :xAxis="temps" :yAxis="timestamps" label="Temperature (°C)" />
-        <chartjs class="chart" :xAxis="pressures" :yAxis="timestamps" label="Pressures (hPa)" color="green" />
-        <chartjs class="chart" :xAxis="humidities" :yAxis="timestamps" label="Humidity (% RH)" color="blue" />
+    <div>
+        <amplify-authenticator class="auth"></amplify-authenticator>
+        <div v-if="stats">
+            <chartjs class="chart" :xAxis="temps" :yAxis="timestamps" label="Temperature (°C)" />
+            <chartjs class="chart" :xAxis="pressures" :yAxis="timestamps" label="Pressures (hPa)" color="green" />
+            <chartjs class="chart" :xAxis="humidities" :yAxis="timestamps" label="Humidity (% RH)" color="blue" />
+        </div>
     </div>
 </template>
 

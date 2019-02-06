@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Chart from './views/Chart.vue';
+import store from './store';
 
 Vue.use(Router);
 
@@ -26,6 +27,13 @@ export default new Router({
       path: '/chart',
       name: 'chart',
       component: Chart,
+      beforeEnter: (to, from, next) => {
+        if (store.state.signedIn && store.state.stats) {
+          next();
+        } else {
+          next(false);
+        }
+      },
     },
   ],
 });

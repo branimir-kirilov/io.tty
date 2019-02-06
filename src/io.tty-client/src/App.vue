@@ -2,12 +2,22 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Stats</router-link> |
-      <router-link to="/chart">Chart</router-link> | 
+      <router-link v-if="shouldShow" to="/chart">Chart</router-link> <span v-if="shouldShow"> | </span>
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    shouldShow() {
+      return !!this.$store.state.signedIn && this.$store.state.deviceId;
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
