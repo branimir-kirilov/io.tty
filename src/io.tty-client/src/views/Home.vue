@@ -1,19 +1,22 @@
 <template>
   <div class="home">
     <h1 class="heading">io.tty</h1>
-    <h5 class="body">Smart room monitoring</h5>
-    <StatsList msg="Welcome to Your Vue.js App"/>
+    <h5 class="body heading" >Smart room monitoring</h5>
+    <LatestMeasurement />
+    <authenticator class="auth"></authenticator>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import StatsList from '@/components/StatsList.vue';
+import LatestMeasurement from '@/components/LatestMeasurement.vue';
+import { components, AmplifyEventBus } from 'aws-amplify-vue';
 
 export default {
   name: 'home',
   components: {
-    StatsList,
+    LatestMeasurement,
+    ...components,
   },
 };
 </script>
@@ -22,12 +25,16 @@ export default {
 .heading {
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 95px;
-  margin: 0 auto;
+  margin: 15px auto;
 }
 
 .body {
     font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
     margin: 0;
+}
+
+.heading {
+    margin-bottom: 25px;
 }
 </style>

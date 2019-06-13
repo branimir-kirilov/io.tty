@@ -18,7 +18,7 @@ export default {
     color: {
       type: String,
       default: '#f87979',
-    }
+    },
   },
   data() {
     // const temp = this.stats.map(stat => stat.payload.state.reported.temp);

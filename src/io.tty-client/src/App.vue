@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Stats</router-link> |
+      <router-link to="/">Current</router-link> |
+      <router-link v-if="shouldShow" to="/all">All</router-link> <span v-if="shouldShow"> | </span>
       <router-link v-if="shouldShow" to="/chart">Chart</router-link> <span v-if="shouldShow"> | </span>
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <router-view />
+    <amplify-sign-out class="sign-out" v-if="shouldShow"></amplify-sign-out>
   </div>
 </template>
 
@@ -14,9 +16,9 @@ export default {
   computed: {
     shouldShow() {
       return !!this.$store.state.signedIn && this.$store.state.deviceId;
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -36,5 +38,11 @@ export default {
       color: #42b983;
     }
   }
+}
+
+.sign-out {
+  position: absolute;
+  top: 25px;
+  right: 25px;
 }
 </style>

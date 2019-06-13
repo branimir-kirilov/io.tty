@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <div v-if="stats && isAuthenticated && this.storedDeviceId">
-      <SingleMeasurmentShort v-for="singleStat in statsReversed" v-bind:key="singleStat.timestamp" :stats="singleStat"/>
+      <SingleMeasurement :stats="statsReversed[0]"/>
     </div>
     <div v-else-if="isAuthenticated && this.storedDeviceId">
       <span>Loading...</span>
@@ -17,10 +17,10 @@ import { components, AmplifyEventBus } from 'aws-amplify-vue';
 import DynamoDB from 'aws-sdk/clients/dynamodb';
 import { Auth } from 'aws-amplify';
 import { mapState } from 'vuex';
-import SingleMeasurmentShort from '@/components/SingleMeasurmentShort.vue';
+import SingleMeasurement from '@/components/SingleMeasurement.vue';
 
 export default {
-  name: 'StatsList',
+  name: 'LatestMeasurement',
   async created() {
     this.$store.dispatch('getDeviceIdFromLocalStorage');
 
@@ -47,7 +47,7 @@ export default {
       });
   },
   components: {
-    SingleMeasurmentShort,
+    SingleMeasurement,
     ...components,
   },
   data() {

@@ -9,8 +9,9 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "aws-amplify": "^1.1.19",
-    "aws-amplify-vue": "^0.2.5",
+    "aws-amplify": "^1.1.28",
+    "aws-amplify-vue": "^0.2.11",
+    "aws-sdk": "^2.473.0",
     "axios": "^0.18.0",
     "chart.js": "^2.7.3",
     "vue": "^2.5.22",

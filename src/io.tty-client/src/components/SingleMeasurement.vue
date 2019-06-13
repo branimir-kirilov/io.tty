@@ -34,17 +34,12 @@
 import { Auth } from 'aws-amplify';
 
 export default {
-  name: 'SingleMeasurment',
+  name: 'SingleMeasurmentShort',
   props: {
     stats: {
       type: Object,
       required: true,
     },
-  },
-  created() {
-    // AmplifyEventBus.$on('authState', info => {
-    //   console.log(`Here is the auth event that was just emitted by an Amplify component: ${info}`)
-    // });
   },
   computed: {
     isAuthenticated() {
@@ -69,7 +64,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .main {
   text-align: center;
