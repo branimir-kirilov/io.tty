@@ -14,7 +14,6 @@
 
 <script>
 import { components, AmplifyEventBus } from 'aws-amplify-vue';
-import DynamoDB from 'aws-sdk/clients/dynamodb';
 import { Auth } from 'aws-amplify';
 import { mapState } from 'vuex';
 import SingleMeasurement from '@/components/SingleMeasurement.vue';

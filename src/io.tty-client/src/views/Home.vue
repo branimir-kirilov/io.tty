@@ -8,7 +8,7 @@
 <script>
 // @ is an alias to /src
 import LatestMeasurement from '@/components/LatestMeasurement.vue';
-import { components, AmplifyEventBus } from 'aws-amplify-vue';
+import { components } from 'aws-amplify-vue';
 
 export default {
   name: 'home',

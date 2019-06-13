@@ -14,13 +14,19 @@
               <tbody>
                 <tr>
                   <td>
-                     <strong> {{ stats.payload.state.reported.temp }}°C </strong>
+                     <strong>
+                      {{ stats.payload.state.reported.temp }}°C
+                     </strong>
                   </td>
                   <td>
-                    <strong> {{ stats.payload.state.reported.pressure.toFixed(3) }} hPa </strong>
+                    <strong>
+                        {{ stats.payload.state.reported.pressure.toFixed(3) }} hPa
+                    </strong>
                   </td>
                   <td>
-                    <strong> {{ stats.payload.state.reported.humidity.toFixed(3) }} % RH </strong>
+                    <strong>
+                      {{ stats.payload.state.reported.humidity.toFixed(3) }} % RH
+                    </strong>
                   </td>
                 </tr>
               </tbody>
@@ -41,19 +47,14 @@ export default {
       required: true,
     },
   },
-  created() {
-    // AmplifyEventBus.$on('authState', info => {
-    //   console.log(`Here is the auth event that was just emitted by an Amplify component: ${info}`)
-    // });
-  },
   computed: {
     isAuthenticated() {
       return !!Auth.user;
     },
   },
   methods: {
-    timeConverter(UNIX_timestamp) {
-      const a = new Date(UNIX_timestamp * 1);
+    timeConverter(unixTimestamp) {
+      const a = new Date(unixTimestamp * 1);
       const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       const year = a.getFullYear();
       const month = months[a.getMonth()];

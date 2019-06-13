@@ -1,20 +1,27 @@
 <template>
   <div class="hello">
     <div v-if="stats && isAuthenticated && this.storedDeviceId">
-      <SingleMeasurmentShort v-for="singleStat in statsReversed" v-bind:key="singleStat.timestamp" :stats="singleStat"/>
+      <SingleMeasurmentShort
+        v-for="singleStat in statsReversed"
+        v-bind:key="singleStat.timestamp"
+        :stats="singleStat"
+      />
     </div>
     <div v-else-if="isAuthenticated && this.storedDeviceId">
       <span>Loading...</span>
     </div>
     <div v-else-if="isAuthenticated">
-      <input class="deviceInput" placeholder="Enter Your Unique Device Id" type="text" v-model="deviceId" v-on:keyup.enter="submitDeviceId">
+      <input class="deviceInput"
+        placeholder="Enter Your Unique Device Id"
+        type="text" v-model="deviceId"
+        v-on:keyup.enter="submitDeviceId"
+      >
     </div>
   </div>
 </template>
 
 <script>
 import { components, AmplifyEventBus } from 'aws-amplify-vue';
-import DynamoDB from 'aws-sdk/clients/dynamodb';
 import { Auth } from 'aws-amplify';
 import { mapState } from 'vuex';
 import SingleMeasurmentShort from '@/components/SingleMeasurmentShort.vue';
