@@ -1,13 +1,19 @@
 <template>
   <div class="hello">
-    <div v-if="stats && isAuthenticated && this.storedDeviceId">
+    <div v-if="isAuthenticated && this.storedDeviceId && stats && !stats.length">
+      <div>
+        <span class="error">The device id is invalid. Please try again...</span>
+      </div>
+      <input tab-index="1" class="deviceInput" placeholder="Enter the device id, located on the back of device" type="text" v-model="deviceId" v-on:keyup.enter="submitDeviceId">
+    </div>
+    <div v-else-if="stats && isAuthenticated && this.storedDeviceId">
       <SingleMeasurement :stats="statsReversed[0]"/>
     </div>
     <div v-else-if="isAuthenticated && this.storedDeviceId">
       <span>Loading...</span>
     </div>
     <div v-else-if="isAuthenticated">
-      <input class="deviceInput" placeholder="Enter Your Unique Device Id" type="text" v-model="deviceId" v-on:keyup.enter="submitDeviceId">
+      <input tab-index="1" class="deviceInput" placeholder="Enter the device id, located on the back of device" type="text" v-model="deviceId" v-on:keyup.enter="submitDeviceId">
     </div>
   </div>
 </template>
@@ -52,6 +58,7 @@ export default {
   data() {
     return {
       deviceId: null,
+      submited: false,
     };
   },
   computed: mapState({
@@ -64,6 +71,7 @@ export default {
   }),
   methods: {
     submitDeviceId() {
+      this.loading = true;
       this.$store.dispatch('setDeviceId', this.deviceId);
     },
   },
@@ -87,15 +95,37 @@ a {
 }
 
 .deviceInput {
+  padding: 0 15px;
   margin: 150px auto;
-  width: 500px;
-  height: 50px;
-  font-size: 23px;
+  width: 800px;
+  height: 40px;
+  font-size: 24px;
   font-style: italic;
+  text-align: center;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: none;
+  outline: none;
+  -webkit-transition: all .1s ease-out;
+  -moz-transition: all .1s ease-out;
+  -ms-transition: all .1s ease-out;
+  -o-transition: all .1s ease-out;
+  transition: all .1s ease-out
+}
+
+.deviceInput:focus {
+  box-shadow: none;
+  outline: none;
+  box-shadow: 0px 0px 5px 1px #38a071;
 }
 
 .auth {
   margin: 30px 0;
+}
+
+.error {
+  font-size: 24px;
+  color: red;
 }
 
 </style>
