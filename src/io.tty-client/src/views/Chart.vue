@@ -5,6 +5,7 @@
             <chartjs class="chart" :xAxis="temps" :yAxis="timestamps" label="Temperature (°C)" />
             <chartjs class="chart" :xAxis="pressures" :yAxis="timestamps" label="Pressures (hPa)" color="green" />
             <chartjs class="chart" :xAxis="humidities" :yAxis="timestamps" label="Humidity (% RH)" color="blue" />
+            <chartjs class="chart" :xAxis="distances" :yAxis="timestamps" label="Distance to sensor (cm)" color="yellow" />
         </div>
     </div>
 </template>
@@ -32,6 +33,9 @@ export default {
     },
     pressures() {
       return this.stats.map(stat => stat.payload.state.reported.pressure);
+    },
+    distances() {
+      return this.stats.map(stat => stat.payload.state.reported.distance);
     },
     timestamps() {
       return this.stats.map(stat => this.timeConverter(stat.timestamp));

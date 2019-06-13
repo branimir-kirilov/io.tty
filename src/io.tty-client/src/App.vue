@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <h1 class="heading">io.tty</h1>
+    <h5 class="body heading" >Smart room monitoring</h5>
     <div id="nav">
       <router-link to="/">Current</router-link> |
       <router-link v-if="shouldShow" to="/all">All</router-link> <span v-if="shouldShow"> | </span>

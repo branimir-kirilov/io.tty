@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-    <h1 class="heading">io.tty</h1>
-    <h5 class="body heading" >Smart room monitoring</h5>
     <LatestMeasurement />
     <authenticator class="auth"></authenticator>
   </div>
