@@ -2,17 +2,22 @@
 #include <ArduinoJson.h>    
 #include <ESP8266AWSIoTMQTTWS.h>
 #include <Adafruit_BME280.h>
+#include <hcsr04.h>
 
 const char *ssid = "***";
 const char *password = "***";
 
+#define trigPin D7
+#define echoPin D6
+
+// See `src/aws_iot_config.h` for formatting
 char *region = (char *) "***";
 char *endpoint = (char *) "***";
 char *mqttHost = (char *) "***";
 int mqttPort = 443;
 char *iamKeyId = (char *) "***";
 char *iamSecretKey = (char *) "***";
-const char* aws_topic  = "$aws/things/***/shadow/update";
+const char* aws_topic  = "***";
 
 
 ESP8266DateTimeProvider dtp;
@@ -24,7 +29,12 @@ AWSMqttClient client(adapter, cp);
 float bme_pressure, bme_temp, bme_humidity;
 Adafruit_BME280 bme; // Note Adafruit assumes I2C adress = 0x77 my module (eBay) uses 0x76 so the library address has been changed.
 
+int distance;
+int duration;
+
 void setup() {
+    pinMode(trigPin, OUTPUT);
+    pinMode(echoPin, INPUT);
 
     Serial.begin(115200);
     while(!Serial) {
@@ -58,8 +68,22 @@ void setup() {
 }
 
 void loop() {
-  if (client.isConnected()) {
-    bme_temp     = bme.readTemperature();
+  if (client.isConnected()) {  
+    digitalWrite(trigPin, LOW);
+    delayMicroseconds(2);
+  
+    // Sets the trigPin on HIGH state for 10 micro seconds
+    digitalWrite(trigPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin, LOW);
+
+
+    duration = pulseIn(echoPin, HIGH);  // Reads the echoPin, returns the sound wave travel time in microseconds
+    distance = duration * 0.034 / 2;  
+    
+    Serial.println("Distance: " + String(distance) + "cm");
+    
+    bme_temp     = bme.readTemperature();        // No correction factor needed for this sensor
     bme_humidity = bme.readHumidity() + 1.0;     // Plus a correction factor for this sensor
     bme_pressure = bme.readPressure()/100 + 3.7; // Plus a correction factor for this sensor
 
@@ -71,6 +95,7 @@ void loop() {
     state_reported["temp"] = bme_temp;
     state_reported["humidity"] = bme_humidity;
     state_reported["pressure"] = bme_pressure;
+    state_reported["distance"] = distance;
 
     serializeJson(root, Serial);
     Serial.println();
@@ -79,6 +104,7 @@ void loop() {
 
     client.publish(aws_topic, shadow, 0, false);
     client.yield();
+
   } else {
     Serial.println("Not connected...");
     delay(2000);
