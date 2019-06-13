@@ -29,3 +29,5 @@ The setup for this is easy - check [the board code](./src/thing/aws-iot-core-mqt
 #### VueJs Client
 
 - The **VueJs** client located [here](./src/io.tty-client) was created with **Vue CLI (v3)** and **aws-amplify + aws-amplify-vue** for easier configuration of **AWS Cognito**. The authenticated role of the user pool for this application was given read access on the **DynamoDB** table for it, meaning that only authenticated users from that particular user pool can get the data from that table.
+ 
+![home](./docs/home.png)
