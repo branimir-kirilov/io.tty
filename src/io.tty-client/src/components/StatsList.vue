@@ -36,6 +36,12 @@ export default {
         this.$store.dispatch('signedIn');
         this.$store.dispatch('getStats');
       }
+
+      if (info === 'signedOut') {
+        this.$store.dispatch('signOut');
+        this.$store.dispatch('removeStats');
+        this.$store.dispatch('removeDeviceId');
+      }
     });
 
     await Auth.currentAuthenticatedUser()
