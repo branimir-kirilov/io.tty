@@ -15,6 +15,9 @@
     <div v-else-if="isAuthenticated">
       <input tab-index="1" class="deviceInput" placeholder="Enter the device id, located on the back of device" type="text" v-model="deviceId" v-on:keyup.enter="submitDeviceId">
     </div>
+    <div v-else-if="isAuthenticated">
+      <input tab-index="1" class="deviceInput" placeholder="Enter the device id, located on the back of device" type="text" v-model="deviceId" v-on:keyup.enter="submitDeviceId">
+    </div>
   </div>
 </template>
 

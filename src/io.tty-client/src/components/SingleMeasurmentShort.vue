@@ -27,6 +27,9 @@
                     <strong>
                       {{ stats.payload.state.reported.humidity.toFixed(3) }} % RH
                     </strong>
+                    <strong>
+                      {{ stats.payload.state.reported.humidity.toFixed(3) }} % RH
+                    </strong>
                   </td>
                 </tr>
               </tbody>
