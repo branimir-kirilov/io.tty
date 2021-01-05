@@ -12,7 +12,7 @@
     "aws-amplify": "^1.1.28",
     "aws-amplify-vue": "^0.2.11",
     "aws-sdk": "^2.473.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "chart.js": "^2.7.3",
     "vue": "^2.5.22",
     "vue-chartjs": "^3.4.0",
